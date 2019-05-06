@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击编辑</title>
+    <script src="./vue.js"></script>
+    <style>
+     h3{
+         cursor: pointer;
+     }
+     .ys{
+         height: 40px;
+         width: 200px;
+         border: 5px solid greenyellow;
+         background-color: skyblue;
+         line-height: 40px;
+         text-align: center;
+     }
+     .show{
+        visibility: hidden;
+     }
+
+    </style>
+</head>
+<body>
+
+    <div id="main">
+        <!-- 提示框 -->
+        <div id="wrap" :class="{ys:isYs ,show:isShow}">
+            <input type="text"  v-model="text">
+        </div>
+        <h3 @click.stop="btn">{{text}}</h3>
+    </div>    
+</body>
+<script>
+    new Vue({
+        el:"#main",
+        data:{
+            text:"点我，编辑内容",
+            isYs:true,
+            isShow:true,
+        },
+        methods:{
+            
+            btn:function(){
+                this.isShow=!this.isShow
+            }
+        }
+    })
+</script>
+</html>

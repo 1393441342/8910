@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件作业</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+<body>
+    <div id="root">
+        <router-link to="/film">电影</router-link>
+        <router-link to="/photo">图片</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="film">
+        <div>
+            我是电影
+        </div>
+    </template>
+
+
+    <template id="ism">
+        <div>
+            我有很多图片
+        </div>
+    </template>
+</body>
+<script>
+    const film={template:"#film"}
+    const x={template:"#ism"}
+    const p=[
+        {path:"/film",component:film},
+        {path:"/photo",component:x}
+    ]
+    var router=new VueRouter({
+        routes:p
+    })
+    new Vue({
+        el:"#root",
+        router       
+    })
+</script>
+</html>

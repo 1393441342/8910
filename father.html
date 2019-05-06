@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父子互传</title>
+    <script src="./vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        .tcwrap {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(1, 1, 1, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .tcwrap>.content {
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -150px;
+            margin-left: -200px;
+        }
+
+        input {
+            background-color: #eee;
+            border: none;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        .content>p {
+            float: right;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <button @click="showtc('isShowlogin')">登录</button>
+        <button @click="showtc('isShowRigist')">注册</button>
+        <button @click="showtc('isShowAbout')">关于</button>
+        <mytanchuan :is-show="isShowlogin">
+            <div slot="content">
+                <h3>登录</h3>
+                <form action="#">
+                    <input type="text">
+                </form>
+            </div>
+        </mytanchuan>
+        <mytanchuan :is-show="isShowRigist">
+            <div slot="content1">
+                <h3>注册</h3>
+                <form action="#">
+                    <input type="text">
+                </form>
+            </div>
+        </mytanchuan>
+        <mytanchuan :is-show="isShowAbout">
+            <div slot="content1">
+                <h3>关于</h3>
+                <form action="#">
+                    <input type="text">
+                </form>
+            </div>
+        </mytanchuan>
+    </div>
+    <!-- //弹窗组件 -->
+    <template id="box">
+        <div class="tcwrap" v-show="isShow">
+            <div class="content">
+                <p></p>
+              <slot name="content1"></slot>
+            </div>
+        </div>
+    </template>
+</body>
+<script>
+    new Vue({
+        el: "#root",
+        data: {
+            isShowlogin: false,
+            isShowRigist: false,
+            isShowAbout: false
+        },
+        methods: {
+            showtc(a) {
+                this[a] = true
+            }
+        },
+        components: {
+            'mytanchuan': {
+                template: "#box",
+                props: ["text", "isShow"],
+            }
+        }
+
+    })
+</script>
+
+</html>
